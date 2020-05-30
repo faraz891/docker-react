@@ -1,10 +1,12 @@
-FROM mhart/alpine-node:11 AS builder
-WORKDIR /app
-COPY . .
-RUN yarn run build
+# Specify a base image
+FROM node:alpine
 
-FROM mhart/alpine-node
-RUN yarn global add serve
-WORKDIR /app
-COPY --from=builder /app/build .
-CMD ["serve", "-p", "80", "-s", "."]
+WORKDIR /usr/app
+
+# Install some depenendencies
+COPY ./package.json ./
+RUN npm install
+COPY ./ ./
+
+# Default command
+CMD ["npm", "start"]
