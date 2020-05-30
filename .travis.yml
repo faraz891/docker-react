@@ -8,7 +8,7 @@ before_install:
   - docker build -t faraz891/docker-react .
 
 script:
-  - docker run -e CI=true faraz891/docker-react npm run test -- --coverage
+  - docker run -e CI=true faraz891/docker-react npm test -- --coverage
 
 deploy:
   provider: elasticbeanstalk
